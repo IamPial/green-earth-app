@@ -1,6 +1,18 @@
 //find the necessary elements
 const categoriesContainer = document.getElementById("categories-container");
 const treesContainer = document.getElementById("trees-container");
+const loadingSpinner = document.getElementById("loadingSpinner");
+
+// show loading spinner
+const showLoading = () => {
+  loadingSpinner.classList.remove("hidden");
+  treesContainer.innerHTML = "";
+};
+
+// hide loading spinner
+const hideLoading = () => {
+  loadingSpinner.classList.add("hidden");
+};
 
 // load all Categories
 const loadCategories = async () => {
@@ -18,19 +30,12 @@ const loadCategories = async () => {
   });
 };
 
-// {
-//     "id": 1,
-//     "image": "https://i.ibb.co.com/cSQdg7tf/mango-min.jpg",
-//     "name": "Mango Tree",
-//     "description": "A fast-growing tropical tree that produces delicious, juicy mangoes during summer. Its dense green canopy offers shade, while its sweet fruits are rich in vitamins and minerals.",
-//     "category": "Fruit Tree",
-//     "price": 500
-// }
-
 //load all tress
 const loadTrees = async () => {
+  showLoading();
   const res = await fetch("https://openapi.programming-hero.com/api/plants");
   const data = await res.json();
+  hideLoading();
   displayLoadTrees(data.plants);
 };
 
