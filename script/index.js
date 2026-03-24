@@ -32,10 +32,10 @@ const loadCategories = async () => {
 
 // Select Category button & display the card with categories
 const selectCategory = async (categoryId, btn) => {
+  showLoading();
   const allButtons = document.querySelectorAll(
     "#categories-container button, #allTreesBtn",
   );
-  showLoading();
   allButtons.forEach((btn) => {
     btn.classList.remove("btn-primary");
     btn.classList.add("btn-outline");
