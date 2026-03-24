@@ -22,12 +22,26 @@ const loadCategories = async () => {
   const data = await res.json();
   data.categories.forEach((category) => {
     const btn = document.createElement("button");
-    btn.className =
-      "btn btn-outline  w-full hover:bg-[#15803D] hover:text-white";
+    btn.className = "btn btn-outline  w-full ";
     btn.innerText = category.category_name;
+    btn.onclick = () => selectCategory(category.id, btn);
 
     categoriesContainer.appendChild(btn);
   });
+};
+
+// TODO: work with all buttons active
+const selectCategory = async (categoryId, btn) => {
+  const allButtons = document.querySelectorAll(
+    "#categories-container button, #allTreesBtn",
+  );
+
+  allButtons.forEach((btn) => {
+    btn.classList.remove("btn-primary");
+    btn.classList.add("btn-outline");
+  });
+  btn.classList.add("btn-primary");
+  btn.classList.remove("btn-outline");
 };
 
 //load all tress
