@@ -30,18 +30,25 @@ const loadCategories = async () => {
   });
 };
 
-// TODO: work with all buttons active
+// Select Category button & display the card with categories
 const selectCategory = async (categoryId, btn) => {
   const allButtons = document.querySelectorAll(
     "#categories-container button, #allTreesBtn",
   );
-
+  showLoading();
   allButtons.forEach((btn) => {
     btn.classList.remove("btn-primary");
     btn.classList.add("btn-outline");
   });
   btn.classList.add("btn-primary");
   btn.classList.remove("btn-outline");
+
+  const res = await fetch(
+    `https://openapi.programming-hero.com/api/category/${categoryId}`,
+  );
+  const data = await res.json();
+  hideLoading();
+  displayLoadTrees(data.plants);
 };
 
 //load all tress
